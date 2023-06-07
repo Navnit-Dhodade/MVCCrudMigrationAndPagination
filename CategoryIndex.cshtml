@@ -1,0 +1,44 @@
+﻿@model PagedList.IPagedList<NimapTask.Models.CategoryMaster>
+
+@{
+    ViewBag.Title = "CategoryIndex";
+}
+@using PagedList.Mvc;
+@using PagedList;
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "CategoryCreate")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.First().CategoryID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().CategoryName)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <th>
+                @Html.DisplayFor(modelItem => item.CategoryID)
+            </th>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "CategoryEdit", new { id = item.CategoryID }) |
+                @Html.ActionLink("Details", "CategoryDetails", new { id = item.CategoryID }) |
+                @Html.ActionLink("Delete", "CategoryDelete", new { id = item.CategoryID })
+            </td>
+        </tr>
+    }
+
+</table>
+
+@Html.PagedListPager(Model, i => Url.Action("CategoryIndex", "Category", new { i, search = Request.QueryString["search"] }))
+

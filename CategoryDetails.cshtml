@@ -1,0 +1,26 @@
+﻿@model NimapTask.Models.CategoryMaster
+
+@{
+    ViewBag.Title = "CategoryDetails";
+}
+
+<h2>CategoryDetails</h2>
+
+<div>
+    <h4>CategoryMaster</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CategoryName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CategoryName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CategoryID }) |
+    @Html.ActionLink("Back to List", "CategoryIndex")
+</p>

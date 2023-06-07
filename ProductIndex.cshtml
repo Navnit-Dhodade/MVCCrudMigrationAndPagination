@@ -1,0 +1,70 @@
+﻿@model IEnumerable<NimapTask.Models.ProductMaster>
+
+@{
+    ViewBag.Title = "ProductIndex";
+}
+@using PagedList.Mvc;
+@using PagedList;
+
+<h2>ProductIndex</h2>
+
+<p>
+    @Html.ActionLink("Create New", "ProductCreate")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.First().ProductId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().ProductName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().CategoryID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().CategoryMaster.CategoryName)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryMaster.CategoryName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "ProductEdit", new { id = item.ProductId }) |
+                @Html.ActionLink("Details", "ProductDetails", new { id = item.ProductId }) |
+                @Html.ActionLink("Delete", "ProductDelete", new { id = item.ProductId })
+            </td>
+        </tr>
+    }
+
+</table>
+@*@Html.PagedListPager(Model, i => Url.Action("ProductIndex", "Product", new { i, search = Request.QueryString["search"] }))*@
+@{
+    double totalPages = ViewBag.TotalPages;
+    for (int i = 1; i <= totalPages; i++)
+    {
+        <ul class="pagination">
+            <li>
+                @Html.ActionLink(i.ToString(), "ProductIndex", new { PageNumber = totalPages })
+
+
+            </li>
+        </ul>
+    }
+}
+
+
